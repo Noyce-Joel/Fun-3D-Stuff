@@ -52,17 +52,17 @@ function Images() {
         rotation={[0, 0.4, 0]}
         position={[-1, 0, -1]}
         scale={4.5}
-        url="Img3.jpg"
+        url="Img3.jpg" alt=''
       />
-      <Image position={[9, 0, -5]} scale={4.5} url="Img2.jpg" />
+      <Image position={[9, 0, -5]} scale={4.5} url="Img2.jpg" alt='' />
       <Image
         rotation={[0, -0.4, 0]}
         position={[19, 0, -1.5]}
         scale={4.5}
-        url="Img6.jpg"
+        url="Img6.jpg" alt=''
       />
-      <Image position={[4, 0, -3]} scale={4.5} url="Img4.jpg" />
-      <Image position={[14, 0, -3]} scale={4.5} url="Img5.jpg" />
+      <Image position={[4, 0, -3]} scale={4.5} url="Img4.jpg" alt='' />
+      <Image position={[14, 0, -3]} scale={4.5} url="Img5.jpg" alt='' />
       <Text anchorX={-21.7} {...fontProps}> Hey, I'm Rosie and I've been an illustrator and </Text>
       <Text anchorX={-21.7} anchorY={.2} {...fontProps}> artist for the past 15 years.</Text>
       <Text anchorX={-51.7} {...fontProps}>These are some of the projects I've worked on. </Text>
@@ -73,17 +73,17 @@ function Images() {
         rotation={[0, 0, 0]}
         position={[49, 0, -0.5]}
         scale={4.5}
-        url="Img8.jpg"
+        url="Img8.jpg" alt=''
       />
-    <Image position={[34, 0, -5]} scale={4.5} url="Img7.jpg" />
+    <Image position={[34, 0, -5]} scale={4.5} url="Img7.jpg" alt='' />
     <Image
         rotation={[0, -0.4, 0]}
         position={[44, 0, -1.5]}
         scale={4.5}
-        url="Img9.jpg"
+        url="Img9.jpg" alt=''
       />
-      <Image position={[29, 0, -3]} scale={4.5} url="Img4.jpg" />
-      <Image position={[39, 0, -3]} scale={4.5} url="Img5.jpg" />
+      <Image position={[29, 0, -3]} scale={4.5} url="Img4.jpg" alt='' />
+      <Image position={[39, 0, -3]} scale={4.5} url="Img5.jpg" alt='' />
       
     </group>
   );
