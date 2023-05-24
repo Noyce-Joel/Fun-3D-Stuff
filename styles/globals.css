@@ -9,15 +9,12 @@ body{
   color: white;
   background-color: black;
 }
-
-.page{
-  height: 100vh;
+.canvas{
   width: 100vw;
+  height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  
 }
+
 
 .overlay{
   display: flex;
@@ -43,19 +40,19 @@ body{
   display: flex;
   gap: 1rem;
   position: fixed;
-  top: 150;
+  
   
 }
-.follow-wrapper{
-  display: flex;
-  position: absolute;
-  
-}
+
 .follow{
   display: flex;
+  position: absolute;
   color: white;
-  gap: 1rem
+  gap: 1rem;
+  padding-top: 60px;
+  
 }
+
 .icon-wrapper{
   display: flex;
   position: absolute;
@@ -90,13 +87,13 @@ top: 170px;
 @media screen and (max-width:500px){
  
  .overlay{
-  padding: 0px;
-  padding-top: 10px;
-  font-size: calc(20px);
+  padding: 20px;
+  
+  font-size: calc(30px);
   
  }
  .heading{
-  height: 30px
+  height: 35px
  }
  .line{
   border: solid;
@@ -107,9 +104,12 @@ top: 170px;
   width: 60vw;
   left: 3000px
 }
+.follow{
+  padding-top: 40px
+}
 
 }
-@media screen and (max-height:500px){
+@media screen and (max-height:700px){
   body{
     overflow: hidden
   }
@@ -126,5 +126,9 @@ top: 170px;
    border: solid;
    width: 350px;
    border-width: 0.4px;
+ }
+ .follow{
+  flex-direction: column;
+  padding-top: 50px
  }
  }

@@ -20,7 +20,7 @@ function Image({ url, ...props }) {
     <ImageImpl
       url={url}
       scale={4.5}
-      rotation={[0, 0.4, 0]}
+      rotation={[0, 0.25, 0]}
       className="img"
       ref={ref}
       {...props}
@@ -47,7 +47,7 @@ function Images() {
     color: "white",
     lineHeight: 1,
   };
-  const { gl } = useThree();
+
   return (
     <group ref={group}>
       <Image position={[-1, 0, -1]} url="Img3.jpg" alt="image one" />
@@ -55,6 +55,7 @@ function Images() {
       <Image position={[19, 0, -1.5]} url="Img6.jpg" alt="" />
       <Image position={[4, 0, -3]} url="Img4.jpg" alt="" />
       <Image position={[14, 0, -3]} url="Img5.jpg" alt="" />
+
       <Text anchorX={-21.7} {...fontProps}>
         {" "}
         Hey, Im Rosie and Ive been an illustrator and{" "}
@@ -72,16 +73,12 @@ function Images() {
       <Text anchorX={-height / 1.7} anchorY={2.5} {...fontProps}>
         PORTFOLIO
       </Text>
-      <Html portal={{ current: gl.domElement.parentNode }} position={[55,2,0]}>
-        <div className="follow-wrapper">
-      <Follow />
-      </div>
-      </Html>
       <Image position={[49, 0, -0.5]} url="Img8.jpg" alt="" />
       <Image position={[34, 0, -5]} url="Img7.jpg" alt="" />
       <Image position={[44, 0, -1.5]} url="Img9.jpg" alt="" />
       <Image position={[29, 0, -3]} url="Img4.jpg" alt="" />
       <Image position={[39, 0, -3]} url="Img5.jpg" alt="" />
+      
     </group>
   );
 }
@@ -108,7 +105,7 @@ export default function Page() {
     from: {
       x: -550,
 
-      scale: 0.5,
+      scale: 0.7,
     },
     to: {
       x: 0,
@@ -127,32 +124,38 @@ export default function Page() {
     },
   });
   return (
-    <Canvas gl={{ antialiasing: false }} dpr={[1, 2]}>
-      <Suspense fallback={null}>
-        <ScrollControls horizontal={true} damping={0.4} pages={17}>
-          <Scroll>
-            <Images />
-          </Scroll>
-          <Scroll html>
-            <div>
-              <div className="overlay">
-                <div className="heading">
-                  <div>
-                    <animated.div style={{ ...spring }}>
-                      ROSIE GLASSE
-                    </animated.div>
-                    <animated.div className="line" style={{ ...line }} />
+    <div className="canvas">
+      
+      <Canvas gl={{ antialiasing: false }} dpr={[1, 2]}>
+        <Suspense fallback={null}>
+          <ScrollControls horizontal={true} damping={0.4} pages={17}>
+            <Scroll>
+              <Images />
+            </Scroll>
+
+            <Scroll html>
+              <div>
+                <div className="overlay">
+                  <div className="heading">
+                    <div>
+                      <animated.div style={{ ...spring }}>
+                        ROSIE GLASSE
+                      </animated.div>
+                      <animated.div className="line" style={{ ...line }} />
+                    </div>
                   </div>
+                  
+                  <Follow />
+                 
                 </div>
+               
               </div>
-              <div className="follow-wrapper">
-                
-              </div>
-            </div>
-          </Scroll>
-        </ScrollControls>
-        <Preload />
-      </Suspense>
-    </Canvas>
+            </Scroll>
+          </ScrollControls>
+
+          <Preload />
+        </Suspense>
+      </Canvas>
+    </div>
   );
 }
