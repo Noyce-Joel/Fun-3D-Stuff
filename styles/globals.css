@@ -61,7 +61,8 @@ body{
 }
 .line{
   border: solid;
-  width: 700px
+  width: 700px;
+  overflow-x:hidden
 }
 .about{
   display: flex;
