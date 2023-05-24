@@ -1,4 +1,4 @@
-import React, { Suspense, useRef } from "react";
+import React, { Suspense, useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import {
   Preload,
@@ -7,13 +7,25 @@ import {
   useScroll,
   Image as ImageImpl,
   Text,
-  Html
+  Html,
 } from "@react-three/drei";
-import { useSpring, animated, useInView} from "react-spring";
+import { useSpring, animated } from "@react-spring/web";
+import { SocialIcon } from "react-social-icons";
+import Follow from "./Follow";
 
-function Image({ ...props }) {
+function Image({ url, ...props }) {
   const ref = useRef();
-  return <ImageImpl ref={ref} {...props} />;
+
+  return (
+    <ImageImpl
+      url={url}
+      scale={4.5}
+      rotation={[0, 0.4, 0]}
+      className="img"
+      ref={ref}
+      {...props}
+    />
+  );
 }
 
 function Images() {
@@ -29,62 +41,47 @@ function Images() {
     group.current.children[4].material.zoom = 1 + data.range(0, 1 / 2) / 4;
     group.current.children[4].material.zoom = 1 + data.range(0, 1 / 2) / 4;
   });
-  const fontProps = { fontSize: 0.2, letterSpacing: -0.05, color: 'white', lineHeight: 1
-  }
-  const [ref, springs] = useInView(
-    () => ({
-      from: {
-        scale: 0.55,
-      },
-      to: {
-        scale: 1,
-      },
-      config: { tension: 210, friction: 100, mass: 25 },
-    }),
-    {
-      rootMargin: "-27% 0%",
-    }
-  );
+  const fontProps = {
+    fontSize: 0.2,
+    letterSpacing: -0.05,
+    color: "white",
+    lineHeight: 1,
+  };
+  const { gl } = useThree();
   return (
     <group ref={group}>
-      <Image
-
-        rotation={[0, 0.4, 0]}
-        position={[-1, 0, -1]}
-        scale={4.5}
-        url="Img3.jpg" alt=''
-      />
-      <Image position={[9, 0, -5]} scale={4.5} url="Img2.jpg" alt='' />
-      <Image
-        rotation={[0, -0.4, 0]}
-        position={[19, 0, -1.5]}
-        scale={4.5}
-        url="Img6.jpg" alt=''
-      />
-      <Image position={[4, 0, -3]} scale={4.5} url="Img4.jpg" alt='' />
-      <Image position={[14, 0, -3]} scale={4.5} url="Img5.jpg" alt='' />
-      <Text anchorX={-21.7} {...fontProps}> Hey, I'm Rosie and I've been an illustrator and </Text>
-      <Text anchorX={-21.7} anchorY={.2} {...fontProps}> artist for the past 15 years.</Text>
-      <Text anchorX={-51.7} {...fontProps}>These are some of the projects I've worked on. </Text>
-      <Text anchorX={-51.7} anchorY={.2} {...fontProps}>I have a passion for drawing and painting. </Text>
-      <Text anchorX={-height / 1.7} anchorY={2.5} {...fontProps}>PORTFOLIO</Text>
-     
-      <Image
-        rotation={[0, 0, 0]}
-        position={[49, 0, -0.5]}
-        scale={4.5}
-        url="Img8.jpg" alt=''
-      />
-    <Image position={[34, 0, -5]} scale={4.5} url="Img7.jpg" alt='' />
-    <Image
-        rotation={[0, -0.4, 0]}
-        position={[44, 0, -1.5]}
-        scale={4.5}
-        url="Img9.jpg" alt=''
-      />
-      <Image position={[29, 0, -3]} scale={4.5} url="Img4.jpg" alt='' />
-      <Image position={[39, 0, -3]} scale={4.5} url="Img5.jpg" alt='' />
-      
+      <Image position={[-1, 0, -1]} url="Img3.jpg" alt="image one" />
+      <Image position={[9, 0, -5]} url="Img2.jpg" alt="" />
+      <Image position={[19, 0, -1.5]} url="Img6.jpg" alt="" />
+      <Image position={[4, 0, -3]} url="Img4.jpg" alt="" />
+      <Image position={[14, 0, -3]} url="Img5.jpg" alt="" />
+      <Text anchorX={-21.7} {...fontProps}>
+        {" "}
+        Hey, Im Rosie and Ive been an illustrator and{" "}
+      </Text>
+      <Text anchorX={-21.7} anchorY={0.2} {...fontProps}>
+        {" "}
+        artist for the past 15 years.
+      </Text>
+      <Text anchorX={-51.7} {...fontProps}>
+        These are some of the projects Ive worked on.{" "}
+      </Text>
+      <Text anchorX={-51.7} anchorY={0.2} {...fontProps}>
+        I have a passion for drawing and painting.{" "}
+      </Text>
+      <Text anchorX={-height / 1.7} anchorY={2.5} {...fontProps}>
+        PORTFOLIO
+      </Text>
+      <Html portal={{ current: gl.domElement.parentNode }} position={[55,2,0]}>
+        <div className="follow-wrapper">
+      <Follow />
+      </div>
+      </Html>
+      <Image position={[49, 0, -0.5]} url="Img8.jpg" alt="" />
+      <Image position={[34, 0, -5]} url="Img7.jpg" alt="" />
+      <Image position={[44, 0, -1.5]} url="Img9.jpg" alt="" />
+      <Image position={[29, 0, -3]} url="Img4.jpg" alt="" />
+      <Image position={[39, 0, -3]} url="Img5.jpg" alt="" />
     </group>
   );
 }
@@ -102,17 +99,31 @@ export default function Page() {
       y: 0,
       scale: 1,
     },
-    animate:{
-        delay: 5
-    }
+    animate: {
+      delay: 5,
+    },
+  });
+  const spring2 = useSpring({
+    config: { stiffness: 15, friction: 90, damping: 5, mass: 1.5 },
+    from: {
+      x: -550,
+
+      scale: 0.5,
+    },
+    to: {
+      x: 0,
+    },
+    animate: {
+      delay: 5,
+    },
   });
   const line = useSpring({
     config: { stiffness: 15, friction: 170, damping: 32, mass: 2 },
     from: {
-      x: 1700
+      x: 1700,
     },
     to: {
-      x: 0
+      x: 0,
     },
   });
   return (
@@ -121,19 +132,22 @@ export default function Page() {
         <ScrollControls horizontal={true} damping={0.4} pages={17}>
           <Scroll>
             <Images />
-            
           </Scroll>
           <Scroll html>
-            <div className="overlay">
-              <div className="heading">
-                <div>
-                  <animated.div style={{ ...spring }}>
-                    ROSIE GLASSE
-                  </animated.div>
-                  <animated.div className="line" style={{ ...line }} />
+            <div>
+              <div className="overlay">
+                <div className="heading">
+                  <div>
+                    <animated.div style={{ ...spring }}>
+                      ROSIE GLASSE
+                    </animated.div>
+                    <animated.div className="line" style={{ ...line }} />
+                  </div>
                 </div>
               </div>
-             
+              <div className="follow-wrapper">
+                
+              </div>
             </div>
           </Scroll>
         </ScrollControls>

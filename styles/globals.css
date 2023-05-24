@@ -39,7 +39,29 @@ body{
   overflow-y: hidden;
   
 }
-
+.icons{
+  display: flex;
+  gap: 1rem;
+  position: fixed;
+  top: 150;
+  
+}
+.follow-wrapper{
+  display: flex;
+  position: absolute;
+  
+}
+.follow{
+  display: flex;
+  color: white;
+  gap: 1rem
+}
+.icon-wrapper{
+  display: flex;
+  position: absolute;
+  overflow-y: hidden;
+  height: 20px
+}
 .line{
   border: solid;
   width: 700px
@@ -52,6 +74,7 @@ body{
   top: 250px;
   font-size: calc(40px)
 }
+
 .bg{
   display: flex;
   width: 50vw;

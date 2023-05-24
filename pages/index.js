@@ -3,6 +3,7 @@ import Page from "../components/Page";
 import Head from "next/head";
 
 
+
 export default function Home() {
   return (
     <div className="page">
@@ -13,6 +14,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
      <Page />
+     
    </div>
   );
 }
