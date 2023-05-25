@@ -47,7 +47,7 @@ const Text1 = (props) => {
         for you to keep scrolling to see more of my loveableness and amazing art
         borne out of my incredible lovliness. He needs me, he needs me, he needs
         me, he needs me, oh, how he needs me. I am also extremely cute but you
-        must not go on about it! Hehehe.
+        must not go on about it! Hehehe
       </animated.div>
     </div>
   );
