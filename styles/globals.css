@@ -14,12 +14,17 @@ body{
   height: 100vh;
   display: flex;
 }
-
+.page{
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  height: 100vh
+}
 
 .overlay{
   display: flex;
   position: relative;
-  padding: 60px;
+  padding: 50px;
   justify-content: flex-start;
   align-items: flex-start;
   width: 100vw;
@@ -33,7 +38,7 @@ body{
   justify-content: center;
   align-items: center;
   height: 57px;
-  overflow-y: hidden;
+  overflow: hidden;
   
 }
 .icons{
@@ -43,12 +48,15 @@ body{
   
   
 }
+.hi{
+  font-size: calc(5px);
+  color: black
+}
 
 .follow{
   display: flex;
   position: absolute;
   color: white;
-  gap: 1rem;
   padding-top: 60px;
   
 }
@@ -102,9 +110,7 @@ top: 170px;
   border-width: 0.4px;
   
 }
-.line::-webkit-scrollbar {
-  display: none;
-}
+
 .about{
   width: 60vw;
   left: 3000px
