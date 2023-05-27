@@ -7,6 +7,7 @@ function Follow() {
     "https://twitter.com",
     "https://instagram.com",
     "https://facebook.com",
+    "https://github.com",
   ];
 
   const trail = useTrail(socialIconUrls.length, {

@@ -7,19 +7,48 @@ import {
   useScroll,
   Image as ImageImpl,
   Text,
-  Html,
   Billboard,
   OrbitControls,
-  OrthographicCamera,
+  MeshDistortMaterial,
 } from "@react-three/drei";
-import { useSpring, animated } from "@react-spring/web";
-import { SocialIcon } from "react-social-icons";
+import { useSpring, animated, config } from "@react-spring/web";
 import Follow from "./Follow";
-import Hero from "./Hero";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import Berlin from "./Berlin";
+
+
+const AnimatedMeshDistortMaterial = animated(MeshDistortMaterial)
+const AnimatedText = animated(Text)
+
+const MyScene = () => {
+  const [clicked, setClicked] = useState(false)
+
+  const springs = useSpring({
+    color: clicked ? '#569AFF' : '#ff6d6d',
+   
+  })
+
+
+
+  const handleClick = () => setClicked(s => !s)
+
+  return (
+    <mesh  position={[11, 0, -2]} onClick={handleClick}>
+      <sphereGeometry args={[500, 2, 1000]} />
+      <AnimatedMeshDistortMaterial
+        speed={1}
+        distort={0.5}
+        color={springs.color}
+       
+      />
+    </mesh>
+  )
+}
+
 function Image({ url, ...props }) {
   const ref = useRef();
+  
+
+  
 
   return (
     <ImageImpl
@@ -50,13 +79,48 @@ function Images() {
     color: "white",
     lineHeight: 1.5,
   };
+  const [clicked, setClicked] = useState(false)
 
+  const springs = useSpring({
+    config: {friction:70, delay: 5},
+    from:{
+      fillOpacity: 0,
+      anchorY: 20
+      
+    },
+    to: {
+      fillOpacity: 1,
+      anchorY: 2.5
+      
+    }
+    
+  })
+
+
+
+  const handleClick = () => setClicked(s => !s)
   return (
     <group ref={group}>
       
-      <Image position={[0, 0.1, -1.5]} url="Me.jpeg" alt="image one" />
+      <Image position={[1.8, 0.1, -2.5]} url="Me.jpeg" alt="image one" />
       <Billboard follow>
-      <Text
+      <AnimatedText
+        outlineBlur={0.02}
+        textAlign="center"
+        overflowWrap="normal"
+        alignText="center"
+        maxWidth="3.5"
+        {...fontProps}
+        anchorX={1.7}
+        anchorY={springs.anchorY}
+        position={[0, 0, -0.5]}
+        fillOpacity={springs.fillOpacity}
+      >
+       HEY, IM JOEL. IM AN ASPIRING WEB DEVELOPER WITH A PASSION FOR REACT.
+      </AnimatedText>
+      </Billboard>
+      <Billboard follow>
+      <AnimatedText
         outlineBlur={0.02}
         textAlign="center"
         overflowWrap="normal"
@@ -65,14 +129,15 @@ function Images() {
         {...fontProps}
         anchorX={1.7}
         anchorY={2.5}
-        position={[1, 0, -0.5]}
+        position={[12, 3.7, -6.9]}
+        onClick={handleClick}
+       
+        
       >
-       HEY, IM JOEL. IM AN ASPIRING WEB DEVELOPER WITH A PASSION FOR REACT.
-      </Text>
+      Something I really enjoy about React is it's state management object. I love how state can be managed independently between components.
+      </AnimatedText>
       </Billboard>
-      <Billboard follow position={[15, 0.1, -1.5]}>
-        <Image  url='/Img7.jpg'/>
-      </Billboard>
+      
       
       <Billboard follow >
       <Text  position={[0, 0, 0.2]} anchorX={-height / 1.7} anchorY={3.1} {...fontProps}>
@@ -86,7 +151,7 @@ function Images() {
 
 export default function Page() {
   const spring = useSpring({
-    config: { stiffness: 15, friction: 90, damping: 5, mass: 1.5 },
+    config: { stiffness: 15, friction: 70, damping: 5, mass: 1.5 },
     from: {
       x: -150,
       y: 500,
@@ -116,7 +181,7 @@ export default function Page() {
     },
   });
   const line = useSpring({
-    config: { stiffness: 15, friction: 170, damping: 32, mass: 2 },
+    config: { stiffness: 15, friction: 125, damping: 32, mass: 2 },
     from: {
       x: 1700,
     },
@@ -127,12 +192,15 @@ export default function Page() {
   return (
     <div className="canvas">
       <Canvas camera={{ position: [-3, 0, 5] }} gl={{ antialiasing: false }} dpr={[1, 2]}>
-      <OrbitControls minAzimuthAngle={5} enableZoom={false}/>
+        <ambientLight intensity={0.8} />
+      <pointLight intensity={1} position={[0, 6, 0]} />
+     
         <Suspense fallback={null}>
           
-          <ScrollControls horizontal={true} damping={0.4} pages={17}>
+          <ScrollControls horizontal={true} damping={0.4} pages={5}>
             <Scroll>
               <Images />
+              <MyScene />
             </Scroll>
 
             <Scroll html>

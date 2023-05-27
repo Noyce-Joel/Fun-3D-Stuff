@@ -1,5 +1,5 @@
-import React, { Suspense, useRef, useState } from "react";
-import { Canvas, useFrame, useLoader, useThree } from "@react-three/fiber";
+import React, { Suspense, useRef } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import {
   Preload,
   ScrollControls,
@@ -7,16 +7,9 @@ import {
   useScroll,
   Image as ImageImpl,
   Text,
-  Html,
-  Box,
 } from "@react-three/drei";
 import { useSpring, animated } from "@react-spring/web";
-import { SocialIcon } from "react-social-icons";
 import Follow from "./Follow";
-import Hero from "./Hero";
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import * as THREE from 'three'
-import Model from '../components/Model'
 function Image({ url, ...props }) {
   const ref = useRef();
 
