@@ -23,7 +23,7 @@ const MyScene = () => {
   const [clicked, setClicked] = useState(false)
 
   const springs = useSpring({
-    color: clicked ? '#569AFF' : '#ff6d6d',
+    color: clicked ? '#ffffff' : '#ffffff',
    
   })
 
