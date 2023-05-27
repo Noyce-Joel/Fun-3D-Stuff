@@ -134,7 +134,7 @@ function Images() {
        
         
       >
-      Something I really enjoy about React is its state management object. I love how state can be managed independently between components.
+      Something I really really really enjoy about React is its state management object. I love how state can be managed independently between components.
       </AnimatedText>
       </Billboard>
       
